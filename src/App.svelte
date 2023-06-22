@@ -2,6 +2,7 @@
   import {
     Container,
     CurrencyField,
+    CurrencyValue,
     NumericField,
   } from './lib/components';
   import packageSettings from '../package.json';
@@ -29,6 +30,10 @@
       label="Savings"
       value={10000}
       on:change={setBudget}
+  />
+
+  <CurrencyValue
+      value={10000}
   />
 
   <NumericField
