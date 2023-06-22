@@ -5,6 +5,7 @@
     CurrencyValue,
     NumericField,
     CompoundSelector,
+    HelpIcon,
   } from './lib/components';
   import type { Compound } from './lib/types';
   import packageSettings from '../package.json';
@@ -57,4 +58,8 @@
       value={compound}
       on:change={setCompound}
   />
+
+  <HelpIcon>
+    Tooltip text
+  </HelpIcon>
 </Container>
