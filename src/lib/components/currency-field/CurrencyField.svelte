@@ -8,7 +8,7 @@
     // props
     export let value: number;
     export let label: string;
-    export let style: string | undefined;
+    export let style: string | undefined = undefined;
 
     let valueString: string = '';
     const dispatch = createEventDispatcher();
@@ -45,8 +45,8 @@
 <TextField
     variant="outlined"
     type="string"
-    label={label}
+    {label}
+    {style}
     bind:value={valueString}
-    style={style}
     on:input={onChange}
 />

@@ -4,7 +4,9 @@
     CurrencyField,
     CurrencyValue,
     NumericField,
+    CompoundSelector,
   } from './lib/components';
+  import type { Compound } from './lib/types';
   import packageSettings from '../package.json';
 
   let budget = 0;
@@ -15,6 +17,11 @@
   let investmentReturnRate = 0;
   function setInvestmentReturnRate(event: CustomEvent) {
     investmentReturnRate = event.detail;
+  }
+
+  let compound: Compound = 'annually';
+  function setCompound(event: CustomEvent) {
+    compound = event.detail;
   }
 </script>
 
@@ -44,5 +51,10 @@
       style="width: 150px"
       adornment="percent"
       on:change={setInvestmentReturnRate}
+  />
+
+  <CompoundSelector
+      value={compound}
+      on:change={setCompound}
   />
 </Container>

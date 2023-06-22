@@ -14,7 +14,7 @@
     export let min: number | undefined;
     export let max: number | undefined;
     export let adornment: string | undefined;
-    export let style: string | undefined;
+    export let style: string | undefined = undefined;
 
     const dispatch = createEventDispatcher();
     function onChange(event: InputEvent) {
@@ -37,9 +37,9 @@
 <TextField
     variant="outlined"
     type="number"
-    label={label}
+    {label}
+    {style}
     bind:value={value}
-    style={style}
     on:input={onChange}
 >
     <svelte:fragment slot="trailingIcon">

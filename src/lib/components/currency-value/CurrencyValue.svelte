@@ -1,7 +1,7 @@
 <script lang="ts">
     // props
     export let value: number;
-    export let style: string | undefined;
+    export let style: string | undefined = undefined;
 
     const currencyFormatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
@@ -11,6 +11,6 @@
     });
 </script>
 
-<span style={style}>
+<span {style}>
     {currencyFormatter.format(value)}
 </span>
