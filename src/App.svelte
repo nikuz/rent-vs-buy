@@ -2,13 +2,18 @@
   import {
     Container,
     CurrencyField,
+    NumericField,
   } from './lib/components';
   import packageSettings from '../package.json';
 
   let budget = 0;
-
   function setBudget(event: CustomEvent) {
     budget = event.detail;
+  }
+
+  let investmentReturnRate = 0;
+  function setInvestmentReturnRate(event: CustomEvent) {
+    investmentReturnRate = event.detail;
   }
 </script>
 
@@ -22,7 +27,17 @@
 
   <CurrencyField
       label="Savings"
-      value={10}
+      value={10000}
       on:change={setBudget}
+  />
+
+  <NumericField
+      label="Investment return rate"
+      value={8}
+      min={0}
+      max={10}
+      style="width: 150px"
+      adornment="percent"
+      on:change={setInvestmentReturnRate}
   />
 </Container>

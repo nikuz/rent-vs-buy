@@ -5,9 +5,12 @@
     } from 'svelte';
     import TextField from '@smui/textfield';
 
-    export let value: string;
+    // props
+    export let value: number;
     export let label: string;
+    export let style: string | undefined;
 
+    let valueString: string = '';
     const dispatch = createEventDispatcher();
     const currencyFormatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
@@ -16,17 +19,25 @@
         maximumFractionDigits: 0,
     });
 
-    function onChange(event: Event) {
-        const target = event.target as HTMLInputElement;
-        console.log(target.value);
-        value = currencyFormatter.format(target.value);
+    function getFormattedValuePart(value: number): string {
+        return currencyFormatter.format(value).replace(/\d+/g, '');
+    }
 
-        dispatch('change', Number(target.value));
+    function onChange(event: InputEvent) {
+        const currencySign = getFormattedValuePart(1);
+        const digitSeparator = getFormattedValuePart(1111).replace(currencySign, '');
+
+        if (!Number.isNaN(Number(event.data))) {
+            value = Number(valueString.replace(currencySign, '').replace(new RegExp(digitSeparator, 'g'), ''));
+            dispatch('change', value);
+        }
+
+        valueString = currencyFormatter.format(value);
     }
 
     onMount(async () => {
         if (value !== undefined) {
-            value = currencyFormatter.format(value);
+            valueString = currencyFormatter.format(value);
         }
     });
 </script>
@@ -34,7 +45,8 @@
 <TextField
     variant="outlined"
     type="string"
-    bind:value={value}
-    bind:label={label}
-    on:change={onChange}
+    label={label}
+    bind:value={valueString}
+    style={style}
+    on:input={onChange}
 />
